@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Build output
+/build
+/public/bundle.js
+/public/bundle.js.map
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE files
+.idea/
+.vscode/
+
+# Temporary files
+*.tmp
+
+# Dependencies directories
+bower_components/
+jspm_packages/
