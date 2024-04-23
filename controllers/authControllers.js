@@ -46,52 +46,78 @@ export const registerController = async(req, res)=>{
     }
 }
 
-export const loginController = async(req, res)=>{
+export const loginController = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        console.log(req.body)
 
-    try{
-        const{ email, password} = req.body;
+        if (!email || !password) {
+            return res.status(400).send({
+                success: false,
+                message: "Missing required fields"
+            });
+        }
 
-        if( !email || !password  ){
-             return res.send({
-                Error: "Missing required Field"
-            })
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(404).send({
+                success: false,
+                message: "Email not registered"
+            });
         }
-        const existingUser = await userModel.findOne({email})
-        if(!existingUser){
-            res.status(200).send({
-                sucess: false,
-                Message: "Email not registered"
-            })
+
+        const result = await comparePassword(password, user.password);
+
+        if (!result) {
+            return res.status(401).send({
+                success: false,
+                message: "Incorrect Password"
+            });
         }
-        const result = await comparePassword(password, existingUser.password);
-        if(!result){
-            res.status(404).send({
-                sucess: false,
-                Message: "Incorrect Password"
-            })
-        }
-        const token =  JWT.sign({id: existingUser._id}, process.env.SECRET, {expiresIn: "8d"})
+
+        // Create JWT token
+        const token = JWT.sign({ id: user._id }, process.env.SECRET, { expiresIn: "8d" });
+
+        req.user = {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role 
+        };
+
+        console.log(req.user); // Debugging line
+
+
         res.status(200).send({
-            sucess: true,
-            message: "login sucessfully",
+            success: true,
+            message: "Login successful",
             user: {
-                name: existingUser.name,
-                email: existingUser.email,
-            },
-            token
-        })
-
-    }
-    catch(error)
-    {
-        res.status(500).send({
-            Sucess: false,
-            Message: error.message
-           
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                address: user.address,
+                role: user.role,
+              },
+              token,
             
-        })
+        });
+
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: error.message
+        });
     }
+};
 
-   
 
-}
+export const testController = (req, res) => {
+    try {
+      res.send("Protected Routes");
+    } catch (error) {
+      console.log(error);
+      res.send({ error });
+    }
+  };
