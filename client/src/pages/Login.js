@@ -1,12 +1,36 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout/Layout';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try{
+      const res = await axios.post('http://localhost:5000/api/v1/auth/login', {
+        email, password
+   });
+   if(res.data.success){
+     console.log(res.data.Message)
+     toast.success(res.data.Message);
+     navigate("/Category")
+   }
+   else{
+    toast.error(res.data.Message);
+   }
+    }
+    catch(error){
+      toast.error("Something went wrong!")
+    }
+   
   }
 
   return (
