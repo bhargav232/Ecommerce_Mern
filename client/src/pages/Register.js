@@ -12,7 +12,6 @@ const Register = () => {
     const [address, setAdress] = useState("");
     const navigate = useNavigate()
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

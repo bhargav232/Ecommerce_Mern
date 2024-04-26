@@ -14,6 +14,9 @@
   line-height: 24px;
   box-shadow: 0 8px 6px -6px gray ;
   border-bottom: 0.1px solid gray;
+  position: sticky;
+  top: 0; /* Stick to the top */
+  z-index: 1000; /* Ensure it's above other content */
 }
 
 .nav-link{
@@ -37,8 +40,10 @@
 
 .footer{
   color: white;
-  padding: 25px;
+  padding: 16px;
   background: linear-gradient(to right, #434343, #000000);
+  bottom: 0;
+  position: sticky;
 }
 
 .footer p a{
@@ -85,22 +90,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; 
   background-image: url('../src/Assets/register.jpg'); 
-  background-size: cover; 
+  background-size: cover;  
   
  
 }
 
 .register-form {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   padding: 20px;
   background: linear-gradient(to right, #daeb3f, #42d5e6);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin-bottom: 50px;
-  margin-top: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   margin-right: 60%;
 }
 
@@ -115,7 +120,7 @@
 }
 
 .form-control {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -158,4 +163,33 @@
   }
 
   /* Add more styles for smaller screens here */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  background: url("./Assets/login.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: linear-gradient(to right, #cab4c6, #98e2ea);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-right: 57%;
+}
+
+.login-heading {
+  text-align: center;
+  color: #333333;
+}
+
+.form-group {
+  margin-bottom: 20px;
 }
