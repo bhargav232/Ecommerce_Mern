@@ -9,14 +9,55 @@ export const registerController = async(req, res)=>{
     try{
         const{ name, email, password, phone, address, role} = req.body;
 
-        if(!name || !email || !password || !phone || !address ){
-             return res.send({
-                Error: "Missing required Field"
-            })
+        console.log(name, email, password, phone, address)
+
+        if(!name && !email && !password && !phone && !address )
+        {
+            return res.send({
+                Message: "All field are missing",
+                success: false
+              });
+
         }
+
+        if (!name) {
+            return res.send({
+              Message: "Name field is required",
+              success: false
+            });
+          }
+          
+          if (!email) {
+            return res.send({
+              Message: "Email field is required",
+              success: false
+            });
+          }
+          
+          if (!password) {
+            return res.send({
+              Message: "Password field is required",
+              success: false
+            });
+          }
+          
+          if (!phone) {
+            return res.send({
+              Message: "Phone field is required",
+              success: false
+            });
+          }
+          
+          if (!address) {
+            return res.send({
+              Message: "Address field is required",
+              success: false
+            });
+          }
+          
         const existingUser = await userModel.findOne({email})
         if(existingUser){
-            res.status(200).send({
+            return res.status(200).send({
                 sucess: true,
                 Message: "User already exist please login"
             })
@@ -31,7 +72,7 @@ export const registerController = async(req, res)=>{
         }).save()
 
         res.status(200).send({
-            Sucess: true,
+            success: true,
             Message: "user register sucessfully",
             user
         })
@@ -39,11 +80,13 @@ export const registerController = async(req, res)=>{
     catch(error)
     {
         res.status(500).send({
-            Sucess: false,
+            success: false,
             Message: "Error while registering user",
             error
         })
+        console.log(error.message)
     }
+  
 }
 
 export const loginController = async (req, res) => {

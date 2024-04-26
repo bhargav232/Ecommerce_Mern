@@ -86,18 +86,22 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-image: url('../src/Assets/register.jpg'); 
+  background-size: cover; 
+  
+ 
 }
 
 .register-form {
   width: 100%;
   max-width: 400px;
   padding: 20px;
-  background-color: #ffffff;
+  background: linear-gradient(to right, #daeb3f, #42d5e6);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 50px;
   margin-top: 40px;
+  margin-right: 60%;
 }
 
 .register-heading {
@@ -119,13 +123,14 @@
 
 .btn-primary {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #3dabca;
   border: none;
   border-radius: 2px;
   color: #ffffff;
   cursor: pointer;
   margin-left: 38%;
   border-radius: 10%;
+  font-weight: 500;
 }
 
 .btn-primary:hover {
@@ -134,4 +139,23 @@
 .n{
   padding-left: 3px;
   font-weight: 600;
+}
+
+.req{
+  color: red;
+}
+
+
+/* Your existing CSS code */
+
+/* Media query for all elements */
+@media screen and (max-width: 850px) {
+  /* Adjust styles for smaller screens here */
+  .register-form {
+    margin-left: auto; /* Center the form horizontally on smaller screens */
+    margin-right: auto; /* Center the form horizontally on smaller screens */
+    max-width: 50%; /* Adjust max-width for smaller screens */
+  }
+
+  /* Add more styles for smaller screens here */
 }
