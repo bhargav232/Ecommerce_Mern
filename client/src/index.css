@@ -11,17 +11,16 @@
   
 }
 
-/* font-family: "Poppins", sans-serif; */
 .navbar {
   font-family: "Ubuntu", sans-serif;
   font-size: 18px;
   text-transform: uppercase;
-  line-height: 24px;
+  line-height: 26px;
   box-shadow: 0 8px 6px -6px gray ;
   border-bottom: 0.1px solid gray;
   position: sticky;
-  top: 0; /* Stick to the top */
-  z-index: 1000; /* Ensure it's above other content */
+  top: 0; 
+  z-index: 1000; 
 }
 
 .nav-link{
@@ -47,8 +46,9 @@
   color: white;
   padding: 16px;
   background: linear-gradient(to right, #434343, #000000);
-  bottom: 0;
   position: sticky;
+  bottom: 0;
+  margin-top: 11rem;
 }
 
 .footer p a{
@@ -62,24 +62,25 @@
   font-weight: 500;
 }
 
+/* page not found */
 
 .pnf {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  height: 100%; /* Take up full height of the viewport */
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
 }
 
 .pnf-1 {
   font-size: 100px;
   font-weight: 700;
-  margin-bottom: 20px; /* Add some space between 404 and the next line */
+  margin-bottom: 20px; 
 }
 
 .pnf-2 {
   font-weight: normal;
-  margin-bottom: 20px; /* Add some space between "Page Not Found!" and "Go Back" */
+  margin-bottom: 20px; 
 }
 
 .pnf-3 {
@@ -197,4 +198,22 @@
 
 .form-group {
   margin-bottom: 20px;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 40px; /* Adjust this value as needed */
+}
+
+.password-toggle-button {
+  position: absolute;
+  right: 5px; /* Adjust this value as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
