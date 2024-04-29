@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout/Layout';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -20,8 +20,8 @@ const Login = () => {
    });
    if(res.data.success){
      console.log(res.data.Message)
-     toast.success(res.data.Message);
-     navigate("/Category")
+     toast.success("login successfully!");
+     navigate("/HomePage")
    }
    else{
     toast.error(res.data.Message);

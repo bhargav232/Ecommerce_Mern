@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout/Layout'
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
@@ -15,18 +15,18 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-                if (password.length < 8) {
-                    toast.error("Password must be at least 8 characters long");
-                    return;
-                }
-                if (!/\W/.test(password)) {
-                    toast.error("Password must contain at least one special character");
-                    return;
-                }
-                if (!/^\d+$/.test(phone)) {
-                    toast.error("Phone number should contain only numeric characters");
-                    return;
-                }
+                // if (password.length < 8) {
+                //     toast.error("Password must be at least 8 characters long");
+                //     return;
+                // }
+                // if (!/\W/.test(password)) {
+                //     toast.error("Password must contain at least one special character");
+                //     return;
+                // }
+                // if (!/^\d+$/.test(phone)) {
+                //     toast.error("Phone number should contain only numeric characters");
+                //     return;
+                // }
             const res = await axios.post('http://localhost:5000/api/v1/auth/register', {
                 name, email, password, phone, address
             });

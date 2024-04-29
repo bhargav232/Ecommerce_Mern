@@ -2,8 +2,8 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import {Helmet} from "react-helmet";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for React Toastify
+import toast, { Toaster } from 'react-hot-toast';
+
 const Layout = ({children, description,keywords,author,title }) => {
   return (
     <div>
@@ -16,18 +16,7 @@ const Layout = ({children, description,keywords,author,title }) => {
   </Helmet>
     <Header/>
     <main style={{minHeight: '70vh'}}>
-    <ToastContainer
-          style={{ fontSize: '14px', maxWidth: '400px' }} 
-          position="top-right" 
-          autoClose={5000} 
-          hideProgressBar={false} 
-          newestOnTop={false} 
-          closeOnClick 
-          rtl={false}
-          pauseOnFocusLoss 
-          draggable 
-          pauseOnHover 
-        />
+    <Toaster className ="toaster" />
        {children} </main>  
     <Footer/>
     </div>

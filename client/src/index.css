@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+.toaster{
+  background-color: red;
+  
+}
+
 /* font-family: "Poppins", sans-serif; */
 .navbar {
   font-family: "Ubuntu", sans-serif;
