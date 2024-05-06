@@ -41,6 +41,15 @@
   display: flex;
   gap: 5px;
 }
+.authUserName{
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.dropdown-toggle{
+  text-decoration: none;
+  border: none;
+}
 
 .footer{
   color: white;
@@ -99,25 +108,41 @@
   min-height: 100vh; 
   background-image: url('../src/Assets/register.jpg'); 
   background-size: cover;  
-  
+  background-size: 100% 100%; 
+}
+
+.registration-form{
+  position: relative;
+  min-height: 100vh;
  
 }
 
-.register-form {
-  width: 100%;
-  max-width: 300px;
-  padding: 20px;
-  background: linear-gradient(to right, #daeb3f, #42d5e6);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-right: 60%;
+
+.form{
+  margin-left: 2%;
 }
+
+
+.registration-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../src/Assets/register.jpg');
+  background-size: cover;  
+  background-position: center;
+  opacity: 0.6; /* Adjust the opacity value */
+  z-index: -1;
+  background-repeat: repeat;
+
+}
+
 
 .register-heading {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #333333;
 }
 
@@ -133,19 +158,30 @@
 }
 
 .btn-primary {
-  padding: 10px;
+  padding: 15px 30px; 
   background-color: #3dabca;
   border: none;
-  border-radius: 2px;
   color: #ffffff;
   cursor: pointer;
-  margin-left: 38%;
-  border-radius: 10%;
   font-weight: 500;
+  border-radius: 10px;
+  margin-right: 5%;
+  margin-top: 0.5%;
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
+
+}
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.inForm{
+  border: 1px solid black;
+  margin-left: 0.2%;
 }
 .n{
   padding-left: 3px;
@@ -154,6 +190,16 @@
 
 .req{
   color: red;
+}
+.login-buttons{
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+.login-buttons button {
+  flex: 1; 
+  margin: 5px;
 }
 
 
@@ -216,4 +262,16 @@
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+
+
+.spinner{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  min-height: 100vh;
 }

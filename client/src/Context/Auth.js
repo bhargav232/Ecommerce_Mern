@@ -1,3 +1,4 @@
+import axios from "axios";
 import {useContext, useState, createContext, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -13,6 +14,9 @@ const AuthProvider = ({children}) =>{
         }
     )
 
+  // default axios for request!
+   // axios.defaults.headers.common['authorization'] = auth?.token;
+
     useEffect(()=>{
         const data = localStorage.getItem('auth')
         if(data){
@@ -24,8 +28,8 @@ const AuthProvider = ({children}) =>{
             })
 
         }
-        
 
+    // eslint-disable-next-line 
     },[] )
 
     return(

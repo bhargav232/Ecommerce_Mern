@@ -2,16 +2,17 @@ import userModel from "../models/userModels.js"
 import { hashPassword, comparePassword } from "../helpers/authHelper.js";
 import  JWT  from "jsonwebtoken";
 import dotenv from  "dotenv";
+import userModels from "../models/userModels.js";
 dotenv.config();
 
 export const registerController = async(req, res)=>{
 
     try{
-        const{ name, email, password, phone, address, role} = req.body;
+        const{ name, email, password, phone, address, role, answer} = req.body;
 
-        console.log(name, email, password, phone, address)
+        console.log(name, email, password, phone, address, answer)
 
-        if(!name && !email && !password && !phone && !address )
+        if(!name && !email && !password && !phone && !address && !answer )
         {
             return res.send({
                 Message: "All required field are missing",
@@ -54,6 +55,12 @@ export const registerController = async(req, res)=>{
               success: false
             });
           }
+          if (!answer) {
+            return res.send({
+              Message: "Answer field is required",
+              success: false
+            });
+          }
           
         const existingUser = await userModel.findOne({email})
         if(existingUser){
@@ -68,7 +75,8 @@ export const registerController = async(req, res)=>{
             email, 
             password:hpwd, 
             phone, 
-            address
+            address,
+            answer
         }).save()
 
         res.status(200).send({
@@ -90,6 +98,7 @@ export const registerController = async(req, res)=>{
 }
 
 export const loginController = async (req, res) => {
+  console.log("inside login controller")
     try {
         const { email, password } = req.body;
         console.log(req.body)
@@ -135,6 +144,7 @@ export const loginController = async (req, res) => {
 
         // Create JWT token
         const token = JWT.sign({ id: user._id }, process.env.SECRET, { expiresIn: "8d" });
+        console.log(token);
 
         req.user = {
             id: user._id,
@@ -142,9 +152,6 @@ export const loginController = async (req, res) => {
             email: user.email,
             role: user.role 
         };
-
-        console.log(req.user); // Debugging line
-
 
         res.status(200).send({
             success: true,
@@ -170,6 +177,48 @@ export const loginController = async (req, res) => {
 };
 
 
+export const forgetPasswordController = async(req, res)=>{
+
+  console.log("I am here in forgotpassword cntroller")
+
+
+  try{
+    const {email, answer, newPassword} = req.body
+    console.log(email, answer, newPassword)
+
+    if(!email){
+       return res.status(400).send({Message:"Email is required!"})
+    }
+    if(!answer){
+      return res.status(400).send({Message:"Answer is required!"})
+   }
+   if(!newPassword){
+    return res.status(402).send({Message:"Newpassword is required!"})
+   }
+
+   const user = await userModel.findOne({email, answer})
+   console.log(user)
+
+   if(!user){
+    return res.status(400).send({
+      Message: "No User Found"
+    })
+   }
+   const hpwd = await hashPassword(newPassword);
+   await userModel.findByIdAndUpdate(user._id, {password:hpwd})
+    return res.status(200).send({
+      success:true,
+      Message: "password updated sucessfully"
+    })
+  }
+  catch(error){
+    console.log("Error in forgot password", error.message)
+    return res.status(500).send({
+      Message: error.Message,
+      sucess: false
+    })
+  }
+}
 export const testController = (req, res) => {
     try {
       res.send("Protected Routes");

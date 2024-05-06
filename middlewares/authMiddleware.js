@@ -4,14 +4,15 @@ dotenv.config();
 import userModel from "../models/userModels.js"
 
 export const requireSignIn = async (req, res, next) => {
+  console.log("inside requireSignIn")
     try {
-        const token = req.headers.authorization.split(" ")[1];
-
+        const token = req.headers.authorization
+        console.log(token)
         if (!token) {
-            console.log('JWT token is missing'); 
+          console.log("no token")
             return res.status(401).send({
                 success: false,
-                message: "JWT token is missing"
+                Message: "JWT token is missing"
             });
         }
         const decode = JWT.verify(token, process.env.SECRET);
@@ -24,7 +25,7 @@ export const requireSignIn = async (req, res, next) => {
         console.log('JWT verification error:', error); 
         res.status(401).send({
             success: false,
-            message: error.message
+            Message: error.message
         });
     }
 };

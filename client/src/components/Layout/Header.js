@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { HiShoppingBag } from "react-icons/hi2";
+
 import { useAuth } from '../../Context/Auth';
 import toast from 'react-hot-toast';
 
@@ -27,7 +27,9 @@ const Header = () => {
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <Link to ="/" className="navbar-brand"><HiShoppingBag /> Ecommerece App</Link>
+      <Link to ="/" className="navbar-brand">
+     
+        Ecommerece App</Link>
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
         <li className="nav-item">
           <NavLink to = "/" className="nav-link " aria-current="page">Home</NavLink>
@@ -45,20 +47,30 @@ const Header = () => {
         </li>
         </>
         ) :(
-          <li className="nav-item">
-          <NavLink onClick={handleLogout} to = "/Login" className="nav-link" href="#">Logout</NavLink>
-        </li>
+
+          <div className="dropdown">
+            <div className="btn dropdown-toggle " 
+            id="dropdownMenuButton1" data-bs-toggle="dropdown" >
+              <span className='authUserName'>
+              {auth.user.name}
+              </span>
+              
+            </div>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <NavLink to = {`/dashboard/${auth.user.role === false ? "user":"admin"}`} className="nav-link" href="#">Dashboard</NavLink>
+              <NavLink onClick={handleLogout} to = "/Login" className="nav-link" href="#">Logout</NavLink>
+            </ul>
+          </div>
+
+
+        //   <li className="nav-item">
+        //   <NavLink onClick={handleLogout} to = "/Login" className="nav-link" href="#">Logout</NavLink>
+        //  </li>
         )    
         }
         <li className="nav-item">
           <NavLink to = "/Cart" className="nav-link" href="#">Cart (0)</NavLink>
         </li >
-        <li className="nav-item nav-link">
-          <span>
-          {auth.user ?`User: ${auth.user.name}`: ""}
-          </span>
-        </li>
-       
       </ul>
     </div>
   </div>

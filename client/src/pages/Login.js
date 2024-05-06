@@ -22,8 +22,7 @@ const Login = () => {
    });
 
    if(res.data.success){
-    toast.success("login successfully!");
-     console.log(res.data.Message)
+    //toast.success("login successfully!");
      setAuth({
       ...auth,
       user: res.data.user,
@@ -50,6 +49,10 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const redirectForgetPassword = () =>{
+    navigate("/forget-password")
+
+  }
 
 
   return (
@@ -88,12 +91,20 @@ const Login = () => {
                   </span>
                 </div>
               </div>
+              <div className='login-buttons'>
             <button 
               type="submit" 
               className="btn btn-primary btn-block"
             >
-              Submit
+              SignIn
             </button>
+            <button 
+              onClick={redirectForgetPassword}
+              className="btn btn-primary btn-block"
+            >
+              ForgetPassword
+            </button>
+            </div>
           </form>
         </div>
       </div>
