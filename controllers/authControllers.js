@@ -143,7 +143,7 @@ export const loginController = async (req, res) => {
         }
 
         // Create JWT token
-        const token = JWT.sign({ id: user._id }, process.env.SECRET, { expiresIn: "8d" });
+        const token = JWT.sign({ id: user._id }, process.env.SECRET, { expiresIn: '1d' });
         console.log(token);
 
         req.user = {
@@ -169,6 +169,7 @@ export const loginController = async (req, res) => {
         });
 
     } catch (error) {
+      console.log("inside catch of login controller", error.message)
         res.status(500).send({
             success: false,
             Message: error.message
