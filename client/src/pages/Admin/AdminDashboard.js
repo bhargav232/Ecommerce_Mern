@@ -14,7 +14,7 @@ const AdminDashboard = () => {
                 <div className="col-md-3">
                 <AdminMenu panelName = "Admin Panel"/>
                 </div>
-                <div className="col-md-3 card w-75 p-3">
+                <div className="col-md-3 card w-70 p-3">
                  <AdminProfile profile = {auth.user} />
                 </div>
             </div>

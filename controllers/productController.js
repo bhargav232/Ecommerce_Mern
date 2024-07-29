@@ -46,10 +46,37 @@ export const createProductController =  async(req, res)=>{
         res.status(500).send(
             {
                 sucess: false,
-                Message: "Error while creating product"
+                Message: "Error while creating product",
+                error: err.message
             }
         )
 
     }
 }
 
+export const getProductController =  async(req, res)=>{
+
+  try{
+    // creating multiple Api's as photo may take more time for retrival!
+      const products = await productModel.find({}).select("-photo").limit(12).sort({createdAT: -1})
+      res.status(200).send({
+        success: true,
+        Message: "Fetch product runs successfully!",
+        Products_Total: products.length,
+        products
+    })
+
+  }
+  catch(err){
+    console.log(err.message);
+    res.status(500).send(
+        {
+            sucess: false,
+            Message: "Error while fetching product",
+            error: err.message
+        }
+    )
+
+}
+
+}
