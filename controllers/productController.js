@@ -58,10 +58,10 @@ export const getProductController =  async(req, res)=>{
 
   try{
     // creating multiple Api's as photo may take more time for retrival!
-      const products = await productModel.find({}).select("-photo").limit(12).sort({createdAT: -1})
+      const products = await productModel.find({}).populate('category').select("-photo").limit(12).sort({createdAT: -1})
       res.status(200).send({
         success: true,
-        Message: "Fetch product runs successfully!",
+        Message: "Fetch multiple-products runs successfully!",
         Products_Total: products.length,
         products
     })
@@ -72,7 +72,33 @@ export const getProductController =  async(req, res)=>{
     res.status(500).send(
         {
             sucess: false,
-            Message: "Error while fetching product",
+            Message: "Error while fetching products",
+            error: err.message
+        }
+    )
+
+}
+}
+
+export const getSingleProductController =  async(req, res)=>{
+
+
+  try{
+    
+     const product = await productModel.find({slug:req.params.slug}).populate('category').select("-photo").limit(12).sort({createdAT: -1})
+     res.status(200).send({
+      success: true,
+      Message: "Fetch single-product runs successfully!",
+      product
+  })
+
+  }
+  catch(err){
+    console.log(err.message);
+    res.status(500).send(
+        {
+            sucess: false,
+            Message: "Error while fetching single-product",
             error: err.message
         }
     )
