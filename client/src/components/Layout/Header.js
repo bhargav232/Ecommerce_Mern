@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../Context/Auth';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu visibility
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // User dropdown visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); 
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setAuth({
@@ -16,6 +18,7 @@ const Header = () => {
     });
     localStorage.removeItem('auth');
     toast.success("Successfully logged out!");
+    navigate('/login');
   };
 
   return (
